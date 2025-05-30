@@ -104,19 +104,18 @@ exports.userLoginController = async (req, res) => {
 }
 
 exports.getAllusersController = async (req, res) => {
-    console.log("Inside the getusercontroller");
+    console.log("Inside the getusercontrol");
 
 
     try {
         const allusers = await users.find({ roll: "user", block: false })
-
-
         res.status(201).json(allusers);
     } catch (error) {
         console.error("Error in registration:", error);
         res.status(500).json({ message: "Internal Server Error" });
     }
 };
+
 
 exports.getSingleUserController = async (req, res) => {
     console.log("inside the getsingle user controller");
