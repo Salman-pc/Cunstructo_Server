@@ -28,37 +28,18 @@ const socketHandler = (server) => {
         console.log("🔌 A user connected", socket.id);
         const userid = socket.handshake.query.userid
 
-        console.log("➡️ Incoming user ID:", userid);
+        console.log(" Incoming user ID:", userid);
         if (userid) userSocketMap[userid] = socket.id;
 
-        console.log("🟢 Online Users:", Object.keys(userSocketMap));
+        console.log(" Online Users:", Object.keys(userSocketMap));
         // io.emit() is used to send events to all the connected clients
         io.emit("getOnlineusers", Object.keys(userSocketMap));
-
-        // // Send chat history
-        // const messages = await Message.find().sort({ _id: 1 }).limit(50);
-        // socket.emit("chat_history", messages);
-
-        // socket.on("send_message", async (data) => {
-        //   console.log("Message received:", data);
-
-        //   // Save message to DB
-        //   const newMessage = new Message({
-        //     message: data.message,
-        //     time: data.time,
-        //   });
-        //   await newMessage.save();
-
-        //   io.emit("receive_message", newMessage);
-        // });
-
-
 
         // Fix on disconnect:
         socket.on("disconnect", () => {
             console.log("A user disconnected", socket.id);
             delete userSocketMap[userid];
-            io.emit("getOnlineusers", Object.keys(userSocketMap)); // ✅ match casing
+            io.emit("getOnlineusers", Object.keys(userSocketMap)); //  match casing
         });
     });
 

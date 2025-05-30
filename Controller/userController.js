@@ -79,7 +79,7 @@ exports.userLoginController = async (req, res) => {
                 if (ispasswordMatch || password == existingUser.password) {
                     console.log(ispasswordMatch);
 
-                    const token = jwt.sign({ userid: existingUser._id, roll: existingUser.roll }, process.env.jwt_pass)
+                    const token = jwt.sign({ userid: existingUser._id, roll: existingUser.roll }, process.env.jwt_pass,{expiresIn:'2m'})
 
                     console.log(token, "token");
                     res.status(200).json({ user: existingUser, token })
